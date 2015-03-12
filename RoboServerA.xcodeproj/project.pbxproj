@@ -1,0 +1,295 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07DBD44E1AADB22800AA9414 /* RoboServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DBD44D1AADB22800AA9414 /* RoboServer.cpp */; };
+		07DBD4511AADB5C400AA9414 /* SerialMotorDriverMM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DBD44F1AADB5C400AA9414 /* SerialMotorDriverMM.cpp */; };
+		07DBD4541AADC2A300AA9414 /* Robot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DBD4521AADC2A300AA9414 /* Robot.cpp */; };
+		07DBD4571AADC2C400AA9414 /* RobotChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DBD4551AADC2C400AA9414 /* RobotChannel.cpp */; };
+		07DBD45A1AADCC1500AA9414 /* SerialPort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DBD4581AADCC1500AA9414 /* SerialPort.cpp */; };
+		07DBD45D1AAE075800AA9414 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DBD45B1AAE075800AA9414 /* Timer.cpp */; };
+		07E0A8DF1AAEECF500B3D2D1 /* SerialDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07E0A8DD1AAEECF500B3D2D1 /* SerialDisplay.cpp */; };
+		07E0A8F51AB0384100B3D2D1 /* CoordinatesHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07E0A8F31AB0384100B3D2D1 /* CoordinatesHandler.cpp */; };
+		07F2BF5B1AAD986C005D5495 /* UDPLibrary.c in Sources */ = {isa = PBXBuildFile; fileRef = 07F2BF5A1AAD986C005D5495 /* UDPLibrary.c */; };
+		BF338FA1182042AC004B691B /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF338FA0182042AC004B691B /* CoreFoundation.framework */; };
+		BF338FAD18204959004B691B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF338FAC18204959004B691B /* IOKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BF338F9B182042AC004B691B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		07DBD44D1AADB22800AA9414 /* RoboServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoboServer.cpp; sourceTree = "<group>"; };
+		07DBD44F1AADB5C400AA9414 /* SerialMotorDriverMM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerialMotorDriverMM.cpp; sourceTree = "<group>"; };
+		07DBD4501AADB5C400AA9414 /* SerialMotorDriverMM.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SerialMotorDriverMM.hpp; sourceTree = "<group>"; };
+		07DBD4521AADC2A300AA9414 /* Robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Robot.cpp; sourceTree = "<group>"; };
+		07DBD4531AADC2A300AA9414 /* Robot.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Robot.hpp; sourceTree = "<group>"; };
+		07DBD4551AADC2C400AA9414 /* RobotChannel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RobotChannel.cpp; sourceTree = "<group>"; };
+		07DBD4561AADC2C400AA9414 /* RobotChannel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RobotChannel.hpp; sourceTree = "<group>"; };
+		07DBD4581AADCC1500AA9414 /* SerialPort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerialPort.cpp; sourceTree = "<group>"; };
+		07DBD4591AADCC1500AA9414 /* SerialPort.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SerialPort.hpp; sourceTree = "<group>"; };
+		07DBD45B1AAE075800AA9414 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
+		07DBD45C1AAE075800AA9414 /* Timer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
+		07E0A8DD1AAEECF500B3D2D1 /* SerialDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerialDisplay.cpp; sourceTree = "<group>"; };
+		07E0A8DE1AAEECF500B3D2D1 /* SerialDisplay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SerialDisplay.hpp; sourceTree = "<group>"; };
+		07E0A8F31AB0384100B3D2D1 /* CoordinatesHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoordinatesHandler.cpp; sourceTree = "<group>"; };
+		07E0A8F41AB0384100B3D2D1 /* CoordinatesHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CoordinatesHandler.hpp; sourceTree = "<group>"; };
+		07F2BF5A1AAD986C005D5495 /* UDPLibrary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UDPLibrary.c; sourceTree = SOURCE_ROOT; };
+		BF338F9D182042AC004B691B /* RoboServerA */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RoboServerA; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF338FA0182042AC004B691B /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		BF338FAC18204959004B691B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		BF338FAE1820550C004B691B /* ReadMe.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF338F9A182042AC004B691B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF338FA1182042AC004B691B /* CoreFoundation.framework in Frameworks */,
+				BF338FAD18204959004B691B /* IOKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF338F94182042AC004B691B = {
+			isa = PBXGroup;
+			children = (
+				BF338FAE1820550C004B691B /* ReadMe.txt */,
+				BF338FA2182042AC004B691B /* RobotServer */,
+				BF338F9F182042AC004B691B /* Frameworks */,
+				BF338F9E182042AC004B691B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF338F9E182042AC004B691B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF338F9D182042AC004B691B /* RoboServerA */,
+			);
+			name = Products;
+			sourceTree = SOURCE_ROOT;
+		};
+		BF338F9F182042AC004B691B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF338FA0182042AC004B691B /* CoreFoundation.framework */,
+				BF338FAC18204959004B691B /* IOKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF338FA2182042AC004B691B /* RobotServer */ = {
+			isa = PBXGroup;
+			children = (
+				07DBD44D1AADB22800AA9414 /* RoboServer.cpp */,
+				07E0A8F31AB0384100B3D2D1 /* CoordinatesHandler.cpp */,
+				07E0A8F41AB0384100B3D2D1 /* CoordinatesHandler.hpp */,
+				07DBD4521AADC2A300AA9414 /* Robot.cpp */,
+				07DBD4531AADC2A300AA9414 /* Robot.hpp */,
+				07DBD45B1AAE075800AA9414 /* Timer.cpp */,
+				07DBD45C1AAE075800AA9414 /* Timer.hpp */,
+				07DBD4551AADC2C400AA9414 /* RobotChannel.cpp */,
+				07DBD4561AADC2C400AA9414 /* RobotChannel.hpp */,
+				07DBD4581AADCC1500AA9414 /* SerialPort.cpp */,
+				07E0A8DD1AAEECF500B3D2D1 /* SerialDisplay.cpp */,
+				07E0A8DE1AAEECF500B3D2D1 /* SerialDisplay.hpp */,
+				07DBD4591AADCC1500AA9414 /* SerialPort.hpp */,
+				07DBD44F1AADB5C400AA9414 /* SerialMotorDriverMM.cpp */,
+				07DBD4501AADB5C400AA9414 /* SerialMotorDriverMM.hpp */,
+				07F2BF5A1AAD986C005D5495 /* UDPLibrary.c */,
+			);
+			name = RobotServer;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BF338F9C182042AC004B691B /* RoboServerA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF338FA9182042AC004B691B /* Build configuration list for PBXNativeTarget "RoboServerA" */;
+			buildPhases = (
+				BF338F99182042AC004B691B /* Sources */,
+				BF338F9A182042AC004B691B /* Frameworks */,
+				BF338F9B182042AC004B691B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RoboServerA;
+			productName = SerialPortSample;
+			productReference = BF338F9D182042AC004B691B /* RoboServerA */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BF338F95182042AC004B691B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+			};
+			buildConfigurationList = BF338F98182042AC004B691B /* Build configuration list for PBXProject "RoboServerA" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BF338F94182042AC004B691B;
+			productRefGroup = BF338F9E182042AC004B691B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF338F9C182042AC004B691B /* RoboServerA */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF338F99182042AC004B691B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07E0A8F51AB0384100B3D2D1 /* CoordinatesHandler.cpp in Sources */,
+				07DBD4541AADC2A300AA9414 /* Robot.cpp in Sources */,
+				07DBD45A1AADCC1500AA9414 /* SerialPort.cpp in Sources */,
+				07DBD44E1AADB22800AA9414 /* RoboServer.cpp in Sources */,
+				07DBD45D1AAE075800AA9414 /* Timer.cpp in Sources */,
+				07DBD4511AADB5C400AA9414 /* SerialMotorDriverMM.cpp in Sources */,
+				07E0A8DF1AAEECF500B3D2D1 /* SerialDisplay.cpp in Sources */,
+				07DBD4571AADC2C400AA9414 /* RobotChannel.cpp in Sources */,
+				07F2BF5B1AAD986C005D5495 /* UDPLibrary.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BF338FA7182042AC004B691B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BF338FA8182042AC004B691B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BF338FAA182042AC004B691B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = RoboServerA;
+			};
+			name = Debug;
+		};
+		BF338FAB182042AC004B691B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = RoboServerA;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF338F98182042AC004B691B /* Build configuration list for PBXProject "RoboServerA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF338FA7182042AC004B691B /* Debug */,
+				BF338FA8182042AC004B691B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF338FA9182042AC004B691B /* Build configuration list for PBXNativeTarget "RoboServerA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF338FAA182042AC004B691B /* Debug */,
+				BF338FAB182042AC004B691B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BF338F95182042AC004B691B /* Project object */;
+}
