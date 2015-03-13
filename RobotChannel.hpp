@@ -14,6 +14,7 @@
 #include <thread>
 
 #include "SerialMotorDriverMM.hpp"
+#include "JointStateStruct.hpp"
 
 
 class RobotChannel {
@@ -29,7 +30,7 @@ protected:
     bool    _enabled = false;
     volatile bool    _running = false;
     
-    int     _currentLatency;
+
     
     SerialMotorDriverMM * _myDriver;
     std::thread * _myThread;
@@ -38,9 +39,7 @@ protected:
     // Joint stuff
     //
 
-    signed long                 _currentPosition;
-    long long                   _currentPositionTimeStamp;
-    
+    JOINTSTATESTRUCT * _myJointState;
     
     
     
@@ -59,6 +58,7 @@ public:
     void startLoop();
     void runLoop();
     void stopLoop();
+    JOINTSTATESTRUCT * getJointState();
     
     
     

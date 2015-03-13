@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "RobotChannel.hpp"
 #include <thread>
+#include "JointStateStruct.hpp"
 
 class Robot {
     
@@ -24,6 +25,7 @@ public:
     void testCommsCycleTime();
     void startRunning();
     void stopRunning();
+    JOINTSTATESTRUCT * getJointData(int channel);
     
 private:
     RobotChannel* myChannels[1];

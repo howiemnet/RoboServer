@@ -8,6 +8,7 @@
 
 #include "RobotChannel.hpp"
 #include "Timer.hpp"
+#include "JointStateStruct.hpp"
 
 RobotChannel::RobotChannel (char*   portName, // should end up being "/dev/blah"
                             int     address,
@@ -16,7 +17,11 @@ RobotChannel::RobotChannel (char*   portName, // should end up being "/dev/blah"
     _myPortName = portName;
     _myAddress = address;
     _driverType = driverType;
-    
+    _myJointState->currentPosition = 0;
+    _myJointState->currentPositionTimeStamp = 0;
+    _myJointState->currentLatency = 0;
+    _myJointState->positionalError = 0;
+    _myJointState->currentVelocity = 0;
     // set up appropriate driver. Only one type at the mo
     if (driverType == 1) {
         // Motion Mind 3
@@ -31,22 +36,28 @@ RobotChannel::~RobotChannel()
    
 }
 
+JOINTSTATESTRUCT * RobotChannel::getJointState() {
+    return _myJointState;
+}
+
+
+
 signed long RobotChannel::getCurrentPosition()
 {
     
    // Timer timer = Timer();
    // timer.start();
    
-        _currentPosition = _myDriver->getCurrentPosition();
+        _myJointState->currentPosition = _myDriver->getCurrentPosition();
   
   //  double duration = timer.stop();
   //  timer.printTime(duration);
     
-    return _currentPosition;
+    return _myJointState->currentPosition;
 }
 
 void RobotChannel::printCurrentPosition() {
-    printf("CurrentPosition of joint %d: %ld\n", _myAddress, _currentPosition);
+    printf("CurrentPosition of joint %d: %ld\n", _myAddress, _myJointState->currentPosition);
 }
 
 void RobotChannel::moveAtVelocity(int newVelocity)

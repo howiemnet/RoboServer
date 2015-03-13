@@ -11,8 +11,10 @@
 #include <pthread.h>
 #include <time.h>
 #include <unistd.h>
+
+#include "JointStateStruct.hpp"
 #include "Robot.hpp"
-#include "SerialDisplay.hpp"
+#include "RobotReadout.hpp"
 #include "CoordinatesHandler.hpp"
 
 
@@ -65,48 +67,48 @@ int main(int argc, const char * argv[])
     if (!myCoordsHandler->load()) {
         printf("Failed to load coords\n");
         return -1;
+    } else {
+        printf("Loaded OK.");
     }
     
-    SerialDisplay * myDisplay = new SerialDisplay((char *) "/dev/cu.usbmodemfa421");
-    sleep(1);
-    myDisplay->writeToDisplay((char *) "TESTING!!!\0");
-    sleep(2);
-    myDisplay->clearDisplay();
-    myDisplay->writeToDisplay((char *) "TESTING!!!\0");
-    
-
+   
     
     printf("Hit a key to start running...\n");
     
     
+    RobotReadout * myReadout = new RobotReadout((char *) "/dev/cu.usbmodem3a21");
+    
+    
+    
+    
     
     Robot * myRobot = new Robot();
-    
+    /*
     //myRobot->testCommsCycleTime();
     
     
     // test threads...
     myRobot->startRunning();
     // start running thread
-    
+    */
     char myCommand = 'r';
     
     while (myCommand != 'x') {
         myCommand = waitForKey();
         if (myCommand == 's') {
-            myRobot->printPositions();
+            myReadout->updateChannelScreen(myRobot->getJointData(0));
         }
         
     }
     
-    myRobot->stopRunning();
+    //myRobot->stopRunning();
     
     myCommand = 'r';
     
     while (myCommand != 'x') {
         myCommand = waitForKey();
         if (myCommand == 's') {
-            myRobot->printPositions();
+     //       myRobot->printPositions();
         }
         
     }

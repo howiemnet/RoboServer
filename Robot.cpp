@@ -46,4 +46,11 @@ void Robot::startRunning() {
 
 void Robot::stopRunning() {
     myChannels[0]->stopLoop();
+    
+    
+}
+
+
+JOINTSTATESTRUCT * Robot::getJointData(int channel) {
+    return myChannels[channel]->getJointState();
 }

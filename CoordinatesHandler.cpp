@@ -101,7 +101,7 @@ bool CoordinatesHandler::load() {
         myFile.close();
         
         // test:
-        printf("line %f is %f",  _myCoords[30][0],  _myCoords[30][1]);
+        //printf("line %f is %f",  _myCoords[30][0],  _myCoords[30][1]);
         return true;
     } else {
         printf("Couldn't open file\n");

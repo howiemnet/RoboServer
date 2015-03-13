@@ -18,6 +18,7 @@ class SerialDisplay {
 public:
     SerialDisplay(char * myPortName);
     void clearDisplay();
+    void moveCursor(int x, int y);
     void writeToDisplay(char * displayString);
         
     

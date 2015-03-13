@@ -13,6 +13,7 @@
 		07DBD4571AADC2C400AA9414 /* RobotChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DBD4551AADC2C400AA9414 /* RobotChannel.cpp */; };
 		07DBD45A1AADCC1500AA9414 /* SerialPort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DBD4581AADCC1500AA9414 /* SerialPort.cpp */; };
 		07DBD45D1AAE075800AA9414 /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DBD45B1AAE075800AA9414 /* Timer.cpp */; };
+		07DE09951AB1E6CA0036042C /* RobotReadout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DE09931AB1E6CA0036042C /* RobotReadout.cpp */; };
 		07E0A8DF1AAEECF500B3D2D1 /* SerialDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07E0A8DD1AAEECF500B3D2D1 /* SerialDisplay.cpp */; };
 		07E0A8F51AB0384100B3D2D1 /* CoordinatesHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07E0A8F31AB0384100B3D2D1 /* CoordinatesHandler.cpp */; };
 		07F2BF5B1AAD986C005D5495 /* UDPLibrary.c in Sources */ = {isa = PBXBuildFile; fileRef = 07F2BF5A1AAD986C005D5495 /* UDPLibrary.c */; };
@@ -44,6 +45,9 @@
 		07DBD4591AADCC1500AA9414 /* SerialPort.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SerialPort.hpp; sourceTree = "<group>"; };
 		07DBD45B1AAE075800AA9414 /* Timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		07DBD45C1AAE075800AA9414 /* Timer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
+		07DE09931AB1E6CA0036042C /* RobotReadout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RobotReadout.cpp; sourceTree = "<group>"; };
+		07DE09941AB1E6CA0036042C /* RobotReadout.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RobotReadout.hpp; sourceTree = "<group>"; };
+		07DE09961AB1F1EE0036042C /* JointStateStruct.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = JointStateStruct.hpp; sourceTree = "<group>"; };
 		07E0A8DD1AAEECF500B3D2D1 /* SerialDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerialDisplay.cpp; sourceTree = "<group>"; };
 		07E0A8DE1AAEECF500B3D2D1 /* SerialDisplay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SerialDisplay.hpp; sourceTree = "<group>"; };
 		07E0A8F31AB0384100B3D2D1 /* CoordinatesHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoordinatesHandler.cpp; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				07DBD44D1AADB22800AA9414 /* RoboServer.cpp */,
+				07DE09961AB1F1EE0036042C /* JointStateStruct.hpp */,
 				07E0A8F31AB0384100B3D2D1 /* CoordinatesHandler.cpp */,
 				07E0A8F41AB0384100B3D2D1 /* CoordinatesHandler.hpp */,
 				07DBD4521AADC2A300AA9414 /* Robot.cpp */,
@@ -113,6 +118,8 @@
 				07DBD4591AADCC1500AA9414 /* SerialPort.hpp */,
 				07DBD44F1AADB5C400AA9414 /* SerialMotorDriverMM.cpp */,
 				07DBD4501AADB5C400AA9414 /* SerialMotorDriverMM.hpp */,
+				07DE09931AB1E6CA0036042C /* RobotReadout.cpp */,
+				07DE09941AB1E6CA0036042C /* RobotReadout.hpp */,
 				07F2BF5A1AAD986C005D5495 /* UDPLibrary.c */,
 			);
 			name = RobotServer;
@@ -169,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07E0A8F51AB0384100B3D2D1 /* CoordinatesHandler.cpp in Sources */,
+				07DE09951AB1E6CA0036042C /* RobotReadout.cpp in Sources */,
 				07DBD4541AADC2A300AA9414 /* Robot.cpp in Sources */,
 				07DBD45A1AADCC1500AA9414 /* SerialPort.cpp in Sources */,
 				07DBD44E1AADB22800AA9414 /* RoboServer.cpp in Sources */,

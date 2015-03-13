@@ -2,16 +2,33 @@
 RoboServer: the big plan
 ========================
 
+Currently:
+----------
+- RobotChannel object is able to communicate with Motion Mind servo driver
+- Starting to implement the update loop - each RobotChannel, as a separate thread, will read current position, work out new velocity, and send it
 
 Want to be able to:
-  - receive commands from Blender
-  - send to arm
+    - receive commands from Blender (probably via a UDP socket)
+    - send to arm (via serial)
 
 Classes:
-- robot
-    - channel
-        - motorDriver
-            - Motion Mind
+- Robot
+    - RobotChannel
+        - SerialMotorDriverMM
+            - SerialPort
+
+
+Also:
+- RobotReadout
+    - SerialDisplay
+        - SerialPort
+
+
+
+
+
+
+
 
 Code for doing smooth curves between points:
 

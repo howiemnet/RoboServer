@@ -19,7 +19,14 @@ SerialDisplay::SerialDisplay(char * myPortName) {
 void SerialDisplay::clearDisplay() {
     _mySerialPort->writeChar('\x1A');
     
-};
+}
+
+void SerialDisplay::moveCursor(int x, int y)
+{
+    _mySerialPort->writeChar('\x1B');
+    _mySerialPort->writeChar((char) x);
+    _mySerialPort->writeChar((char) y);
+}
 
 void SerialDisplay::writeToDisplay(char * displayString) {
     _mySerialPort->writeUntilNull(displayString);
