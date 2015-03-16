@@ -10,25 +10,38 @@
 #include <time.h>
 #include <unistd.h>
 
+
 RobotReadout::RobotReadout(char * _myPortName) {
     _myDisplay = new SerialDisplay(_myPortName);
     sleep(1);
-    showChannelScreen();
+    //showChannelScreen();
 }
 
-void RobotReadout::showChannelScreen() {
+void RobotReadout::showChannelScreen(JOINTSTATESTRUCT * theJointData) {
+    _jointData = theJointData;
     _myDisplay->clearDisplay();
-    _myDisplay->writeToDisplay((char *) "Channel Info:   x   ");
+ /*   _myDisplay->writeToDisplay((char *) "Channel Info:   x   ");
     _myDisplay->writeToDisplay((char *) "Pos: xxxxx Err: xxxx");
     _myDisplay->writeToDisplay((char *) "Velocity:  xxxx     ");
     _myDisplay->writeToDisplay((char *) "Refresh: xx ms      ");
-   // _myDisplay->moveCursor(0, 2);
+   */// _myDisplay->moveCursor(0, 2);
    // _myDisplay->writeToDisplay((char *) "asdfa");
 }
 
-void RobotReadout::updateChannelScreen(JOINTSTATESTRUCT * myJointData) {
+void RobotReadout::_updateScreen() {
+    
     char myBuff[20];
-    sprintf(myBuff, "Pos: %d", (int) myJointData->currentPosition);
-    _myDisplay->moveCursor(0, 2);
-    _myDisplay->writeToDisplay((char *) "tre");
+    while (_threadEnabled) {
+        sprintf(myBuff, "Pos: %d", (int) _jointData->currentPosition);
+        _myDisplay->moveCursor(0, 2);
+        _myDisplay->writeToDisplay(myBuff);
+    
+        timespec pauseDuration = {1,0};
+        timespec remainder;
+        nanosleep(&pauseDuration,&remainder);
+    }
+}
+
+void RobotReadout::startReadoutThread() {
+    _readoutThread = new std::thread(&RobotReadout::_updateScreen,this);
 }

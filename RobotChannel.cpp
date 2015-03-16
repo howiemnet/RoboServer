@@ -94,10 +94,13 @@ void RobotChannel::startLoop() {
 }
 
 void RobotChannel::runLoop() {
-
+    Timer timer = Timer();
     while (true) {
         if (_running) {
-          getCurrentPosition();
+            timer.start();
+            getCurrentPosition();
+            moveAtVelocity(0);
+            _myJointState->currentLatency = timer.stop();
         }
     }
 }

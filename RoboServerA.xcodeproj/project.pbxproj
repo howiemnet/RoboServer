@@ -34,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0721AD251AB5D6DD0086D032 /* Puma260Robot.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Puma260Robot.hpp; sourceTree = "<group>"; };
 		07DBD44D1AADB22800AA9414 /* RoboServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoboServer.cpp; sourceTree = "<group>"; };
 		07DBD44F1AADB5C400AA9414 /* SerialMotorDriverMM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerialMotorDriverMM.cpp; sourceTree = "<group>"; };
 		07DBD4501AADB5C400AA9414 /* SerialMotorDriverMM.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SerialMotorDriverMM.hpp; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 				07E0A8F31AB0384100B3D2D1 /* CoordinatesHandler.cpp */,
 				07E0A8F41AB0384100B3D2D1 /* CoordinatesHandler.hpp */,
 				07DBD4521AADC2A300AA9414 /* Robot.cpp */,
+				0721AD251AB5D6DD0086D032 /* Puma260Robot.hpp */,
 				07DBD4531AADC2A300AA9414 /* Robot.hpp */,
 				07DBD45B1AAE075800AA9414 /* Timer.cpp */,
 				07DBD45C1AAE075800AA9414 /* Timer.hpp */,

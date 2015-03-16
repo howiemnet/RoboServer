@@ -27,6 +27,9 @@ class CoordinatesHandler {
     long _numberOfCoordinates;
     vector<vector<float> > _myCoords;
     
+    double interpolateSingleCR(double* p, double* time, double t);
+    
+    
 public:
     CoordinatesHandler(char * filename, int channels);
     float getCoordinateAtTime(float theTime);

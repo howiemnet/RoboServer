@@ -19,13 +19,15 @@ class Robot {
 public:
     Robot();
     ~Robot();
-    bool init();
+    bool initComms();
+    bool homeChannels();
     void printPositions();
     long getSingleJointPosition(int jointNumber);
     void testCommsCycleTime();
     void startRunning();
     void stopRunning();
     JOINTSTATESTRUCT * getJointData(int channel);
+
     
 private:
     RobotChannel* myChannels[1];

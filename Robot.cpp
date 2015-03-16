@@ -7,12 +7,10 @@
 //
 
 #include "Robot.hpp"
-
+#include "Puma260Robot.hpp"
 
 
 Robot::Robot() {
-    // set up channels / joints:
-    myChannels[0] = new RobotChannel((char *) "/dev/cu.usbserial-A50285BI",0,1);
 }
 
 Robot::~Robot() {
@@ -21,9 +19,10 @@ Robot::~Robot() {
 }
 
 
-bool Robot::init(){
+bool Robot::initComms(){
+    // set up channels / joints:
+    myChannels[0] = new RobotChannel((char *) "/dev/cu.usbserial-A50285BI",0,1);
     return true;
-
 }
 
 void Robot::printPositions() {
@@ -50,6 +49,9 @@ void Robot::stopRunning() {
     
 }
 
+bool Robot::homeChannels() {
+    return false;
+}
 
 JOINTSTATESTRUCT * Robot::getJointData(int channel) {
     return myChannels[channel]->getJointState();

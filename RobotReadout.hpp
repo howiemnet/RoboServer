@@ -12,19 +12,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <thread>
 #include "SerialDisplay.hpp"
 #include "JointStateStruct.hpp"
 
 class RobotReadout {
     
     SerialDisplay * _myDisplay;
-    int _currentChannel;
-    void showChannelScreen();
     
+    int _currentChannel;
+    bool _threadEnabled;
+    void _updateScreen();
+
+    std::thread * _readoutThread;
+    JOINTSTATESTRUCT * _jointData;
     
 public:
     RobotReadout(char * _myportName);
-    void updateChannelScreen(JOINTSTATESTRUCT * myJointState);
+    void showChannelScreen(JOINTSTATESTRUCT * theJointData);
+    void startReadoutThread();
 };
 
 #endif /* defined(__RoboServerA__RobotReadout__) */
