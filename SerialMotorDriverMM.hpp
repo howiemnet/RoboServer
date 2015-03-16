@@ -22,6 +22,8 @@ public:
     int  checkDriverRev();
     long getCurrentPosition();
     void moveAtVelocity(int newVelocity);
+    void moveToPosition(long newPosition);
+    void setPIDS(int PTerm, int ITerm, int DTerm, int Scalar);
 
 private:
     SerialPort* _mySerialPort;

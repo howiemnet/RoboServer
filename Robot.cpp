@@ -7,7 +7,7 @@
 //
 
 #include "Robot.hpp"
-#include "Puma260Robot.hpp"
+
 
 
 Robot::Robot() {
@@ -15,19 +15,26 @@ Robot::Robot() {
 
 Robot::~Robot() {
     // set up channels / joints:
-    delete myChannels[0];
+    for (int i=0; i<NUMOFCHANNELS; i++) {
+        delete myChannels[i];
+    }
 }
 
 
 bool Robot::initComms(){
     // set up channels / joints:
-    myChannels[0] = new RobotChannel((char *) "/dev/cu.usbserial-A50285BI",0,1);
+
+    for (int i=0; i<NUMOFCHANNELS; i++) {
+        myChannels[i] = new RobotChannel ( jointData[i] ) ;
+    }
     return true;
 }
 
 void Robot::printPositions() {
-    //for (int i=0; i<myChannels.)
-    myChannels[0]->printCurrentPosition();
+    for (int i=0; i<NUMOFCHANNELS; i++)
+    {
+        myChannels[i]->printCurrentPosition();
+    }
 }
 
 long Robot::getSingleJointPosition(int jointNumber) {
@@ -40,13 +47,15 @@ void Robot::testCommsCycleTime() {
 }
 
 void Robot::startRunning() {
-    myChannels[0]->startLoop();
+    for (int i=0; i<NUMOFCHANNELS; i++) {
+        myChannels[i]->startLoop();
     }
+}
 
 void Robot::stopRunning() {
-    myChannels[0]->stopLoop();
-    
-    
+    for (int i=0; i<NUMOFCHANNELS; i++) {
+        myChannels[i]->stopLoop();
+    }
 }
 
 bool Robot::homeChannels() {
@@ -55,4 +64,32 @@ bool Robot::homeChannels() {
 
 JOINTSTATESTRUCT * Robot::getJointData(int channel) {
     return myChannels[channel]->getJointState();
+}
+
+bool Robot::running() {
+    return _cycleRunning;
+}
+
+void Robot::runCycle() {
+    timeval myStartTime;
+    gettimeofday(&myStartTime, NULL);
+    
+
+}
+
+
+void Robot::linkCoordsHandler(CoordinatesHandler * theCoordsHandler) {
+    for (int i=0; i<NUMOFCHANNELS; i++)
+    {
+        myChannels[i]->linkCoordsHandler(theCoordsHandler);
+    }
+
+}
+
+void Robot::linkTimeHandler(PlaybackTimeHandler * theTimeHandler) {
+    for (int i=0; i<NUMOFCHANNELS; i++)
+    {
+        myChannels[i]->linkTimeHandler(theTimeHandler);
+    }
+
 }

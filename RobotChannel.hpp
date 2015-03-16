@@ -15,6 +15,8 @@
 
 #include "SerialMotorDriverMM.hpp"
 #include "JointStateStruct.hpp"
+#include "PlaybackTimeHandler.hpp"
+#include "CoordinatesHandler.hpp"
 
 
 class RobotChannel {
@@ -40,16 +42,20 @@ protected:
     //
 
     JOINTSTATESTRUCT * _myJointState;
+    PlaybackTimeHandler * myTimeHandler;
+    CoordinatesHandler * myCoordsHandler;
     
     
     
 public:
-    RobotChannel(char * portName, int address, int driverType);
+    RobotChannel(jointSetupData mySetupData);
     ~RobotChannel();
     
     long getCurrentPosition();
     void printCurrentPosition();
     void moveAtVelocity(int newVelocity);
+    void moveToPosition(long newPosition);
+    
     long testCommsCycleTime();
     
     bool isRunning();
@@ -59,7 +65,9 @@ public:
     void runLoop();
     void stopLoop();
     JOINTSTATESTRUCT * getJointState();
-    
+    void linkTimeHandler(PlaybackTimeHandler * theTimeHandler);
+    void linkCoordsHandler(CoordinatesHandler * theCoordsHandler);
+
     
     
 };

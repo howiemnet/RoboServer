@@ -10,25 +10,59 @@
 #include "Timer.hpp"
 #include "JointStateStruct.hpp"
 
-RobotChannel::RobotChannel (char*   portName, // should end up being "/dev/blah"
-                            int     address,
-                            int     driverType)  // the channel or joint number
+
+/*
+.enabled = false,
+.jointNumber = 1,
+.jointControllerType = JCT_MOTIONMIND,
+.controllerSerialAddress = (char *) "/dev/",
+.friendlyName = (char *) "Base",
+.PTerm = 200,
+.ITerm = 0,
+.DTerm = 0,
+.PIDScalar = 8,
+.minCount = 0,
+.maxCount = 10000
+
+
+*/
+
+
+RobotChannel::RobotChannel (jointSetupData mySetupData)  // the channel or joint number
+
+
 {
-    _myPortName = portName;
-    _myAddress = address;
-    _driverType = driverType;
+    _myPortName = mySetupData.controllerSerialAddress;
+    _enabled = mySetupData.enabled;
+    _driverType = mySetupData.jointControllerType;
+    _myAddress = mySetupData.jointNumber;
+    
+    _myJointState = new JOINTSTATESTRUCT;
     _myJointState->currentPosition = 0;
     _myJointState->currentPositionTimeStamp = 0;
     _myJointState->currentLatency = 0;
     _myJointState->positionalError = 0;
     _myJointState->currentVelocity = 0;
     // set up appropriate driver. Only one type at the mo
-    if (driverType == 1) {
-        // Motion Mind 3
-        _myDriver = new SerialMotorDriverMM(portName);
-        _myDriver->initDriver();
+    if (_enabled) {
+        printf("Setting up channel %d\n", mySetupData.jointNumber);
+        if (_driverType == JCT_MOTIONMIND) {
+            // Motion Mind 3
+            _myDriver = new SerialMotorDriverMM(_myPortName);
+            _myDriver->initDriver();
+            //
+            // set up PID stuff
+            //
+            _myDriver->setPIDS(mySetupData.PTerm, mySetupData.ITerm, mySetupData.DTerm, mySetupData.PIDScalar);
+        }
+    } else {
+        printf("Ignoring disabled channel %d\n", mySetupData.jointNumber);
     }
 }
+
+
+
+
 
 RobotChannel::~RobotChannel()
 {
@@ -40,7 +74,9 @@ JOINTSTATESTRUCT * RobotChannel::getJointState() {
     return _myJointState;
 }
 
-
+void RobotChannel::moveToPosition(long newPosition) {
+    _myDriver->moveToPosition(newPosition);
+}
 
 signed long RobotChannel::getCurrentPosition()
 {
@@ -57,7 +93,9 @@ signed long RobotChannel::getCurrentPosition()
 }
 
 void RobotChannel::printCurrentPosition() {
-    printf("CurrentPosition of joint %d: %ld\n", _myAddress, _myJointState->currentPosition);
+    if (_enabled) {
+        printf("CurrentPosition of joint %d: %ld\n", _myAddress, _myJointState->currentPosition);
+    }
 }
 
 void RobotChannel::moveAtVelocity(int newVelocity)
@@ -89,22 +127,48 @@ long RobotChannel::testCommsCycleTime() {
 }
 
 void RobotChannel::startLoop() {
-    _running = true;
-    _myThread = new std::thread(&RobotChannel::runLoop,this);
+    if (_enabled) {
+        _running = true;
+        _myThread = new std::thread(&RobotChannel::runLoop,this);
+    }
 }
 
 void RobotChannel::runLoop() {
     Timer timer = Timer();
-    while (true) {
-        if (_running) {
-            timer.start();
-            getCurrentPosition();
-            moveAtVelocity(0);
-            _myJointState->currentLatency = timer.stop();
+    FILE * pFile;
+    
+    pFile = fopen ("myLog.csv","w");
+    
+    while (_running) {
+        timer.start();
+        getCurrentPosition();
+        long despos = (long) 100 * (myCoordsHandler->getCoordinateAtTime(_myAddress, myTimeHandler->getPlaybackTime()));
+        moveToPosition(despos);
+        //moveAtVelocity(0);
+        _myJointState->currentLatency = timer.stop();
+        //
+        // log to file
+        long myTempTime = myTimeHandler->getPlaybackTime();
+        if ((myTempTime > 0) && (myTempTime < 2000)) {
+            fprintf(pFile,"%ld,%ld,%ld\n",myTempTime,_myJointState->currentPosition,despos);
         }
     }
+    fclose(pFile);
+    
 }
 
 void RobotChannel::stopLoop() {
     _running = false;
+}
+
+
+void RobotChannel::linkCoordsHandler(CoordinatesHandler * theCoordsHandler) {
+   myCoordsHandler = theCoordsHandler;
+    
+}
+
+void RobotChannel::linkTimeHandler(PlaybackTimeHandler * theTimeHandler) {
+   myTimeHandler = theTimeHandler;
+    
+    
 }

@@ -10,12 +10,14 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <time.h>
+#include <sys/time.h>
 #include <unistd.h>
 
 #include "JointStateStruct.hpp"
 #include "Robot.hpp"
 #include "RobotReadout.hpp"
 #include "CoordinatesHandler.hpp"
+#include "PlaybackTimeHandler.hpp"
 
 
 int getch(void)
@@ -42,22 +44,20 @@ char waitForKey() {
 
 
 bool runProgram() {
-    printf("Loading coordinates... \n");
-    CoordinatesHandler * myCoordsHandler = new CoordinatesHandler((char *) "CoordinateList.csv", 1);
-    if (!myCoordsHandler->load()) {
-        printf("Failed to load coords\n");
-        return -1;
-    } else {
-        printf("Loaded OK.");
-    }
-    printf("Hit a key to start running...\n");
+    printf("\n\n\n RUNNING.\n");
+  //  timeval cycleStartTime;
+  //  gettimeofday(&cycleStartTime, NULL);
+    //myRobot.runCycle();
+   // while (myRobot.running()) {
+        // do nothing
+    //}
     return true;
 }
 
 void menuPrintMain() {
     printf("\n\nMAIN MENU\n\n");
-    printf("[c] Check robot comms\n");
     printf("[h] Home robot\n");
+    printf("[p] Print positions\n");
     printf("[r] Run program\n");
     printf("[x] Exit\n");
     
@@ -70,23 +70,82 @@ bool robotHomed = false;
 
 int main(int argc, const char * argv[])
 {
+    
+    // ----------------------------
+    //
+    //   Load coordinates
+    //
+    // ----------------------------
+    
+    printf("Loading coordinates... \n");
+    CoordinatesHandler * myCoordsHandler = new CoordinatesHandler((char *) "CoordinateList.csv", 1);
+    if (!myCoordsHandler->load()) {
+        printf("Failed to load coords\n");
+        return -1;
+    } else {
+        printf("Loaded OK.");
+    }
 
+
+    
+    
+    //myCoordsHandler->interpolationTest();
+    //exit(99);
+
+    
+    
+    
+    
+    
+    
+    
+    // ----------------------------
+    //
+    //   Start the playback time handler
+    //
+    // ----------------------------
+
+    
+    PlaybackTimeHandler * myTimeHandler = new PlaybackTimeHandler();
+    
+    
+    
+    
+    // ----------------------------
+    //
+    //   Initialise the robot
+    //
+    // ----------------------------
+    
     Robot * myRobot = new Robot();
+    robotChecked = myRobot->initComms();
+    myRobot->linkTimeHandler(myTimeHandler);
+    myRobot->linkCoordsHandler(myCoordsHandler);
+    myRobot->startRunning();
+    
+    menuPrintMain();
+    
     
     while (dontQuitYet) {
-        menuPrintMain();
         switch (waitForKey()) {
-            case 'c':
-                // Check robot
-                robotChecked = myRobot->initComms();
-                break;
             case 'h':
                 // home robot
                 robotHomed = myRobot->homeChannels();
                 break;
+            case 'p':
+                // print positions
+                myTimeHandler->printCurrentTime();
+                //printf("Coordinate now: %f\n",myCoordsHandler->getCoordinateAtTime(myTimeHandler->getPlaybackTime()));
+                myRobot->printPositions();
+                
+                break;
             case 'r':
                 // run program
-                runProgram();
+                myTimeHandler->startPlayback();
+                break;
+            case 's':
+                // run program
+                myTimeHandler->stopPlayback();
                 break;
             case 'x':
                 // exit

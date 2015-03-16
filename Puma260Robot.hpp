@@ -8,9 +8,11 @@
 
 #ifndef RoboServerA_Puma260Robot_hpp
 #define RoboServerA_Puma260Robot_hpp
+#include "JointStateStruct.hpp"
 
-int numberOfChannels = 1;
+#define NUMOFCHANNELS 6
 
+extern jointSetupData jointData[];
 
 
 

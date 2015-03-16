@@ -46,6 +46,8 @@ bool CoordinatesHandler::load() {
             ++myCount;
         }
         _numberOfCoordinates = myCount;
+        _endTime = _myCoords[myCount-1][0];
+        printf("End time is %f\n", _endTime);
         myFile.close();
         return true;
     }
@@ -56,14 +58,46 @@ bool CoordinatesHandler::load() {
     }
 }
 
-float CoordinatesHandler::getCoordinateAtTime(float theTime) {
+float CoordinatesHandler::getCoordinateAtTime(int theChannel, long theTime) {
     // returns smoothed coordinate at any given time
-    if (_isLoaded) {
-        // get value
-        return 1.0;
-    } else {
-        return 0.0;
+    int myIndex = (int) (theTime / 40);
+    if (myIndex < 0) {
+        myIndex = 0;
     }
+    if (myIndex >= _numberOfCoordinates) {
+        myIndex = (int) _numberOfCoordinates -1;
+    }
+    // got nearest coordinate in time; do smoothing / interpolation:
+    //
+    
+    // nearest value:
+    float nearestCoord = _myCoords[myIndex][theChannel];
+    
+    // fraction of time we need to interpolate:
+    float partialTimeSlice = (theTime - (myIndex * 40))/40.0f;
+    
+    // check what sort of interpolation is valid (CR is only valid if we have 4 points)
+    if ((myIndex > 0) && (myIndex < (_numberOfCoordinates-3)))
+    {
+        // we can do CR:
+        return (getCRInterpolated(_myCoords[myIndex-1][theChannel], _myCoords[myIndex][theChannel], _myCoords[myIndex+1][theChannel], _myCoords[myIndex+2][theChannel], partialTimeSlice));
+    }
+    else
+    {
+        // can't do CR, try linear:
+        if (myIndex < (_numberOfCoordinates-2)) {
+            float myDelta = _myCoords[myIndex+1][theChannel] - nearestCoord;
+            nearestCoord += (myDelta * (partialTimeSlice / 40));
+        }
+        return nearestCoord;
+    }
+    
+
+
+}
+
+float CoordinatesHandler::getEndTime() {
+    return _endTime;
 }
 
 bool CoordinatesHandler::isLoaded() {
@@ -81,58 +115,71 @@ double CoordinatesHandler::interpolateSingleCR(double* p, double* time, double t
     return C12;
 }
 
-/*
-public static List<Coord> CoordinatesHandler::interpolate(List<Coord> points, int index, int pointsPerSegment, CatmullRomType curveType) {
-    List<Coord> result = new ArrayList<>();
-    double[] x = new double[4];
-    double[] y = new double[4];
-    double[] time = new double[4];
-    for (int i = 0; i < 4; i++) {
-        x[i] = points.get(index + i).X;
-        y[i] = points.get(index + i).Y;
-        time[i] = i;
-    }
-    
-    double tstart = 1;
-    double tend = 2;
-    if (!curveType.equals(CatmullRomType.Uniform)) {
-        double total = 0;
-        for (int i = 1; i < 4; i++) {
-            double dx = x[i] - x[i - 1];
-            double dy = y[i] - y[i - 1];
-            if (curveType.equals(CatmullRomType.Centripetal)) {
-                total += Math.pow(dx * dx + dy * dy, .25);
-            } else {
-                total += Math.pow(dx * dx + dy * dy, .5);
-            }
-            time[i] = total;
-        }
-        tstart = time[1];
-        tend = time[2];
-    }
-    double z1 = 0.0;
-    double z2 = 0.0;
-    if (!Double.isNaN(points.get(index + 1).Z)) {
-        z1 = points.get(index + 1).Z;
-    }
-    if (!Double.isNaN(points.get(index + 2).Z)) {
-        z2 = points.get(index + 2).Z;
-    }
-    double dz = z2 - z1;
-    int segments = pointsPerSegment - 1;
-    result.add(points.get(index + 1));
-    for (int i = 1; i < segments; i++) {
-        double xi = interpolate(x, time, tstart + (i * (tend - tstart)) / segments);
-        double yi = interpolate(y, time, tstart + (i * (tend - tstart)) / segments);
-        double zi = z1 + (dz * i) / segments;
-        result.add(new Coord(xi, yi, zi));
-    }
-    result.add(points.get(index + 2));
-    return result;
+
+
+
+
+
+void CoordinatesHandler::_InitCubicPoly(float x0, float x1, float t0, float t1, CubicPoly &p)
+{
+    p.c0 = x0;
+    p.c1 = t0;
+    p.c2 = -3*x0 + 3*x1 - 2*t0 - t1;
+    p.c3 = 2*x0 - 2*x1 + t0 + t1;
 }
 
-*/
+// standard Catmull-Rom spline: interpolate between x1 and x2 with previous/following points x1/x4
+// (we don't need this here, but it's for illustration)
+void CoordinatesHandler::_InitCatmullRom(float x0, float x1, float x2, float x3, CubicPoly &p)
+{
+    // Catmull-Rom with tension 0.5
+    _InitCubicPoly(x1, x2, 0.5f*(x2-x0), 0.5f*(x3-x1), p);
+}
+
+// compute coefficients for a nonuniform Catmull-Rom spline
+void CoordinatesHandler::_InitNonuniformCatmullRom(float x0, float x1, float x2, float x3, float dt0, float dt1, float dt2, CubicPoly &p)
+{
+    // compute tangents when parameterized in [t1,t2]
+    float t1 = (x1 - x0) / dt0 - (x2 - x0) / (dt0 + dt1) + (x2 - x1) / dt1;
+    float t2 = (x2 - x1) / dt1 - (x3 - x1) / (dt1 + dt2) + (x3 - x2) / dt2;
+    
+    // rescale tangents for parametrization in [0,1]
+    t1 *= dt1;
+    t2 *= dt1;
+    
+    _InitCubicPoly(x1, x2, t1, t2, p);
+}
+
+float CoordinatesHandler::_VecDistSquared(const Vec2D& p, const Vec2D& q)
+{
+    float dx = q.x - p.x;
+    float dy = q.y - p.y;
+    return dx*dx + dy*dy;
+}
+
+void CoordinatesHandler::_InitCentripetalCR(const Vec2D& p0, const Vec2D& p1, const Vec2D& p2, const Vec2D& p3,
+                       CubicPoly &px, CubicPoly &py)
+{
+    float dt0 = powf(_VecDistSquared(p0, p1), 0.25f);
+    float dt1 = powf(_VecDistSquared(p1, p2), 0.25f);
+    float dt2 = powf(_VecDistSquared(p2, p3), 0.25f);
+    
+    // safety check for repeated points
+    if (dt1 < 1e-4f)    dt1 = 1.0f;
+    if (dt0 < 1e-4f)    dt0 = dt1;
+    if (dt2 < 1e-4f)    dt2 = dt1;
+    
+    _InitNonuniformCatmullRom(p0.x, p1.x, p2.x, p3.x, dt0, dt1, dt2, px);
+    _InitNonuniformCatmullRom(p0.y, p1.y, p2.y, p3.y, dt0, dt1, dt2, py);
+}
 
 
+float CoordinatesHandler::getCRInterpolated(float a, float b, float c, float d, float fraction)
+{
+    Vec2D p0(0,a), p1(1,b), p2(2,c), p3(3,d);
+    CubicPoly px, py;
+    _InitCentripetalCR(p0, p1, p2, p3, px, py);
+    return py.eval(fraction);
+}
 
 
