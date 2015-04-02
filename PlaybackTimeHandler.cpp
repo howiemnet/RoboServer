@@ -20,7 +20,7 @@ double PlaybackTimeHandler::_timeInUSecs() {
 
 long   PlaybackTimeHandler::getPlaybackTime() {
     if (_currentState == PTH_PLAYING) {
-        return (_timeInUSecs() - _startTime);
+        return (_timeInUSecs() - _startTime)*0.5;
     } else {
         return -1;
     }

@@ -24,6 +24,11 @@ Also:
         - SerialPort
 
 
+Next steps:
+
+- Serial port configuratificator
+- homing / origin offset
+-
 
 
 

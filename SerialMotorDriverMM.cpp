@@ -54,7 +54,7 @@ int SerialMotorDriverMM::checkDriverRev() {
 signed long SerialMotorDriverMM::getCurrentPosition() {
 
     _mySerialPort->writeToPort((char *) MMGetPosString, sizeof(MMGetPosString)-1);
-
+    usleep(2000);
     char readBuffer[64];
     _mySerialPort->readFromPortUntilLF(readBuffer);
     char * endPtr = readBuffer + 10;
@@ -76,10 +76,10 @@ void SerialMotorDriverMM::moveAtVelocity(int newVelocity) {
 void SerialMotorDriverMM::moveToPosition(long newPosition) {
     _mySerialPort->writeToPort((char *) MMMoveToPosString, sizeof(MMMoveToPosString)-1);
     char numberBuffer[20];
-    int numLength = sprintf(numberBuffer, "%06ld", newPosition);
+    int numLength = sprintf(numberBuffer, "%ld", newPosition);
     _mySerialPort->writeToPort(numberBuffer, numLength);
     _mySerialPort->writeToPort((char *) "\r\n", 2);
-    
+    usleep(2000);
     _waitForOK();
 }
 

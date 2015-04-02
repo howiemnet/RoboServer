@@ -262,15 +262,80 @@ void SerialPort::writeChar(char theChar) {
     write(_fileDescriptor, &theChar, 1);
 }
 
+bool SerialPort::readNumberOfCharactersFromPort(int numOfCharsRequired, char * buffer){
+    char * bufPtr = buffer;
+    ssize_t numBytes;
+    
+    do
+    {
+        fd_set read_fds, write_fds, except_fds;
+        FD_ZERO(&read_fds);
+        FD_ZERO(&write_fds);
+        FD_ZERO(&except_fds);
+        FD_SET(_fileDescriptor, &read_fds);
+        
+        // Set timeout to 1.0 seconds
+        struct timeval timeout;
+        timeout.tv_sec = 0;
+        timeout.tv_usec = 500000;
+        
+        if (select(_fileDescriptor + 1, &read_fds, &write_fds, &except_fds, &timeout) == 1)
+        {
+            numBytes = read(_fileDescriptor, bufPtr, 1);
+            bufPtr ++;
+            numOfCharsRequired --;
+        }
+        else
+        {
+            // timed out
+            return false;
+        }
+        
+            // other serial port error:
+        
+        if (numBytes == -1)
+        {
+            printf("Error reading from Serial port - %s(%d).\n", strerror(errno), errno);
+            return false;
+        }
+    } while (numOfCharsRequired > 0);
+        
+    return true;
+}
+
 
 bool SerialPort::readFromPortUntilLF(char * buffer) {
     char * bufPtr =  buffer;
     ssize_t numBytes;
     //printf ("Waiting for serial...\n");
     do {
+        
+         fd_set read_fds, write_fds, except_fds;
+         FD_ZERO(&read_fds);
+         FD_ZERO(&write_fds);
+         FD_ZERO(&except_fds);
+         FD_SET(_fileDescriptor, &read_fds);
+         
+         // Set timeout to 1.0 seconds
+         struct timeval timeout;
+         timeout.tv_sec = 0;
+         timeout.tv_usec = 500000;
+         
+         // Wait for input to become ready or until the time out; the first parameter is
+         // 1 more than the largest file descriptor in any of the sets
+         if (select(_fileDescriptor + 1, &read_fds, &write_fds, &except_fds, &timeout) == 1)
+         {
+             numBytes = read(_fileDescriptor, bufPtr, 1);//&buffer[sizeof(buffer)] - bufPtr - 1);
+             // fd is ready for reading
+         }
+         else
+         {
+             assert (true == false); // timeout or error
+         }
+        
+        
         // wait for a byte
-        numBytes = read(_fileDescriptor, bufPtr, 1);//&buffer[sizeof(buffer)] - bufPtr - 1);
-        if (numBytes == -1) {
+                if (numBytes == -1) {
             printf("Error reading from Serial port - %s(%d).\n", strerror(errno), errno);
             return false;
         }
@@ -292,6 +357,7 @@ bool SerialPort::readFromPortUntilLF(char * buffer) {
     
     return true;
 }
+
 
 void SerialPort::flushInput() {
     char throwAway[20];

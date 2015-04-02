@@ -11,6 +11,7 @@
 
 
 Robot::Robot() {
+    _cycleRunning = false;
 }
 
 Robot::~Robot() {
@@ -41,14 +42,33 @@ long Robot::getSingleJointPosition(int jointNumber) {
     return myChannels[jointNumber]->getCurrentPosition();
 }
 
+void Robot::nudge(int channel, int nudgeAmount) {
+    myChannels[channel]->nudge(nudgeAmount);
+}
+
+
 void Robot::testCommsCycleTime() {
     myChannels[0]->testCommsCycleTime();
     
 }
 
+void Robot::setVelocityLimits(int16_t velLimit) {
+    for (int i=0; i<NUMOFCHANNELS; i++)
+    {
+        myChannels[i]->setVelocityLimit(velLimit);
+    }
+ 
+}
+
 void Robot::startRunning() {
-    for (int i=0; i<NUMOFCHANNELS; i++) {
-        myChannels[i]->startLoop();
+    if (!_cycleRunning) {
+        for (int i=0; i<NUMOFCHANNELS; i++) {
+            myChannels[i]->startLoop();
+        }
+        _cycleRunning = true;
+        printf("Robot RUNNING\n");
+    } else {
+        printf("Robot already running\n");        
     }
 }
 
@@ -56,6 +76,8 @@ void Robot::stopRunning() {
     for (int i=0; i<NUMOFCHANNELS; i++) {
         myChannels[i]->stopLoop();
     }
+    printf("Robot STOPPED\n");
+
 }
 
 bool Robot::homeChannels() {
@@ -77,6 +99,29 @@ void Robot::runCycle() {
 
 }
 
+void Robot::setAllChannelOrigins() {
+    for (int i=0; i < 6; i++) {
+        myChannels[i]->setOrigin();
+    }
+}
+
+void Robot::gotoZero() {
+    for (int i=0; i < 6; i++) {
+        myChannels[i]->moveToPosition(0);
+    }
+}
+
+void Robot::setChannelOrigin(int channel) {
+    myChannels[channel]->setOrigin();
+}
+
+void Robot::setStartPositions(){
+    for (int i=0; i<NUMOFCHANNELS; i++)
+    {
+        myChannels[i]->setStartPosition();
+    }
+    
+}
 
 void Robot::linkCoordsHandler(CoordinatesHandler * theCoordsHandler) {
     for (int i=0; i<NUMOFCHANNELS; i++)

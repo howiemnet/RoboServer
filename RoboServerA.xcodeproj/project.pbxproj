@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0740B8CF1AC1708F0040E937 /* ManualControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0740B8CD1AC1708F0040E937 /* ManualControl.cpp */; };
+		0740B8D21AC174BA0040E937 /* SerialSetup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0740B8D01AC174BA0040E937 /* SerialSetup.cpp */; };
+		0740B8D51AC177D40040E937 /* UserInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0740B8D31AC177D40040E937 /* UserInterface.cpp */; };
+		0759C6BA1AB83CFF00817C1E /* SerialMotorDriverMMBinary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0759C6B81AB83C1500817C1E /* SerialMotorDriverMMBinary.cpp */; };
 		079503481AB6B5A70010B2E6 /* Puma260Robot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 079503471AB6B5A70010B2E6 /* Puma260Robot.cpp */; };
 		0795034B1AB6D5930010B2E6 /* PlaybackTimeHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 079503491AB6D5930010B2E6 /* PlaybackTimeHandler.cpp */; };
 		07DBD44E1AADB22800AA9414 /* RoboServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07DBD44D1AADB22800AA9414 /* RoboServer.cpp */; };
@@ -37,6 +41,14 @@
 
 /* Begin PBXFileReference section */
 		0721AD251AB5D6DD0086D032 /* Puma260Robot.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Puma260Robot.hpp; sourceTree = "<group>"; };
+		0740B8CD1AC1708F0040E937 /* ManualControl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ManualControl.cpp; sourceTree = "<group>"; };
+		0740B8CE1AC1708F0040E937 /* ManualControl.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ManualControl.hpp; sourceTree = "<group>"; };
+		0740B8D01AC174BA0040E937 /* SerialSetup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerialSetup.cpp; sourceTree = "<group>"; };
+		0740B8D11AC174BA0040E937 /* SerialSetup.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SerialSetup.hpp; sourceTree = "<group>"; };
+		0740B8D31AC177D40040E937 /* UserInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserInterface.cpp; sourceTree = "<group>"; };
+		0740B8D41AC177D40040E937 /* UserInterface.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UserInterface.hpp; sourceTree = "<group>"; };
+		0759C6B81AB83C1500817C1E /* SerialMotorDriverMMBinary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerialMotorDriverMMBinary.cpp; sourceTree = "<group>"; };
+		0759C6B91AB83C4500817C1E /* SerialMotorDriverMMBinary.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SerialMotorDriverMMBinary.hpp; sourceTree = "<group>"; };
 		078386E71AB567AE00258C1C /* Interpolation notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Interpolation notes.txt"; sourceTree = "<group>"; };
 		079503471AB6B5A70010B2E6 /* Puma260Robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Puma260Robot.cpp; sourceTree = "<group>"; };
 		079503491AB6D5930010B2E6 /* PlaybackTimeHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlaybackTimeHandler.cpp; sourceTree = "<group>"; };
@@ -111,6 +123,12 @@
 			isa = PBXGroup;
 			children = (
 				07DBD44D1AADB22800AA9414 /* RoboServer.cpp */,
+				0740B8D31AC177D40040E937 /* UserInterface.cpp */,
+				0740B8D41AC177D40040E937 /* UserInterface.hpp */,
+				0740B8D01AC174BA0040E937 /* SerialSetup.cpp */,
+				0740B8D11AC174BA0040E937 /* SerialSetup.hpp */,
+				0740B8CD1AC1708F0040E937 /* ManualControl.cpp */,
+				0740B8CE1AC1708F0040E937 /* ManualControl.hpp */,
 				07DE09961AB1F1EE0036042C /* JointStateStruct.hpp */,
 				07E0A8F31AB0384100B3D2D1 /* CoordinatesHandler.cpp */,
 				07E0A8F41AB0384100B3D2D1 /* CoordinatesHandler.hpp */,
@@ -130,6 +148,8 @@
 				07DBD4581AADCC1500AA9414 /* SerialPort.cpp */,
 				07DBD44F1AADB5C400AA9414 /* SerialMotorDriverMM.cpp */,
 				07DBD4501AADB5C400AA9414 /* SerialMotorDriverMM.hpp */,
+				0759C6B81AB83C1500817C1E /* SerialMotorDriverMMBinary.cpp */,
+				0759C6B91AB83C4500817C1E /* SerialMotorDriverMMBinary.hpp */,
 				07DE09931AB1E6CA0036042C /* RobotReadout.cpp */,
 				07DE09941AB1E6CA0036042C /* RobotReadout.hpp */,
 				07F2BF5A1AAD986C005D5495 /* UDPLibrary.c */,
@@ -188,11 +208,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0795034B1AB6D5930010B2E6 /* PlaybackTimeHandler.cpp in Sources */,
+				0740B8CF1AC1708F0040E937 /* ManualControl.cpp in Sources */,
+				0740B8D51AC177D40040E937 /* UserInterface.cpp in Sources */,
 				07E0A8F51AB0384100B3D2D1 /* CoordinatesHandler.cpp in Sources */,
 				07DE09951AB1E6CA0036042C /* RobotReadout.cpp in Sources */,
 				079503481AB6B5A70010B2E6 /* Puma260Robot.cpp in Sources */,
 				07DBD4541AADC2A300AA9414 /* Robot.cpp in Sources */,
+				0740B8D21AC174BA0040E937 /* SerialSetup.cpp in Sources */,
 				07DBD45A1AADCC1500AA9414 /* SerialPort.cpp in Sources */,
+				0759C6BA1AB83CFF00817C1E /* SerialMotorDriverMMBinary.cpp in Sources */,
 				07DBD44E1AADB22800AA9414 /* RoboServer.cpp in Sources */,
 				07DBD45D1AAE075800AA9414 /* Timer.cpp in Sources */,
 				07DBD4511AADB5C400AA9414 /* SerialMotorDriverMM.cpp in Sources */,

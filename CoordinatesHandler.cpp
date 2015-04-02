@@ -60,6 +60,7 @@ bool CoordinatesHandler::load() {
 
 float CoordinatesHandler::getCoordinateAtTime(int theChannel, long theTime) {
     // returns smoothed coordinate at any given time
+    float retVal = 0;
     int myIndex = (int) (theTime / 40);
     if (myIndex < 0) {
         myIndex = 0;
@@ -78,9 +79,11 @@ float CoordinatesHandler::getCoordinateAtTime(int theChannel, long theTime) {
     
     // check what sort of interpolation is valid (CR is only valid if we have 4 points)
     if ((myIndex > 0) && (myIndex < (_numberOfCoordinates-3)))
+    
+    //if (false)
     {
         // we can do CR:
-        return (getCRInterpolated(_myCoords[myIndex-1][theChannel], _myCoords[myIndex][theChannel], _myCoords[myIndex+1][theChannel], _myCoords[myIndex+2][theChannel], partialTimeSlice));
+        retVal = (getCRInterpolated(_myCoords[myIndex-1][theChannel], _myCoords[myIndex][theChannel], _myCoords[myIndex+1][theChannel], _myCoords[myIndex+2][theChannel], partialTimeSlice));
     }
     else
     {
@@ -89,9 +92,9 @@ float CoordinatesHandler::getCoordinateAtTime(int theChannel, long theTime) {
             float myDelta = _myCoords[myIndex+1][theChannel] - nearestCoord;
             nearestCoord += (myDelta * (partialTimeSlice / 40));
         }
-        return nearestCoord;
+        retVal = (nearestCoord);
     }
-    
+    return retVal;
 
 
 }

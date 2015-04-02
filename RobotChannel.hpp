@@ -14,6 +14,7 @@
 #include <thread>
 
 #include "SerialMotorDriverMM.hpp"
+#include "SerialMotorDriverMMBinary.hpp"
 #include "JointStateStruct.hpp"
 #include "PlaybackTimeHandler.hpp"
 #include "CoordinatesHandler.hpp"
@@ -31,10 +32,12 @@ protected:
     int     _driverType;
     bool    _enabled = false;
     volatile bool    _running = false;
-    
+    float   _scale;
+    long    _offset;
+    PIDS    _myPIDS;
 
     
-    SerialMotorDriverMM * _myDriver;
+    SerialMotorDriverMMBinary * _myDriver;
     std::thread * _myThread;
 
     //
@@ -52,11 +55,16 @@ public:
     ~RobotChannel();
     
     long getCurrentPosition();
+    long getCurrentSetpoint();
     void printCurrentPosition();
     void moveAtVelocity(int newVelocity);
     void moveToPosition(long newPosition);
     
     long testCommsCycleTime();
+    void nudge(int nudgeAmount);
+    
+    PIDS getPIDS();
+    void setPIDS(PIDS newPIDS);
     
     bool isRunning();
     bool isEnabled();
@@ -67,8 +75,9 @@ public:
     JOINTSTATESTRUCT * getJointState();
     void linkTimeHandler(PlaybackTimeHandler * theTimeHandler);
     void linkCoordsHandler(CoordinatesHandler * theCoordsHandler);
-
-    
+    void setStartPosition();
+    void setOrigin();
+    void setVelocityLimit(int16_t velLimit);
     
 };
 

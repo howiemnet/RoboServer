@@ -21,6 +21,7 @@ class SerialPort {
     
     
 public:
+    int lastCall;
     SerialPort(char * portName, long myBaudRate);
     ~SerialPort();
     bool openPort();
@@ -31,7 +32,7 @@ public:
     void flushInput();
 
     bool readFromPortUntilLF(char * readBuffer);
-    
+    bool readNumberOfCharactersFromPort(int numberOfCharsRequired, char * readBuffer);
 };
 
 

@@ -35,9 +35,17 @@ public:
     JOINTSTATESTRUCT * getJointData(int channel);
     void linkTimeHandler(PlaybackTimeHandler * theTimeHandler);
     void linkCoordsHandler(CoordinatesHandler * theCoordsHandler);
+    void nudge(int channel, int nudgeAmount);
+    void setStartPositions();
+    void setChannelOrigin(int channel);
+    void setAllChannelOrigins();
+    void gotoZero();
+    void setVelocityLimits(int16_t velLimit);
+    RobotChannel* myChannels[6];
+
+    
     
 private:
-    RobotChannel* myChannels[6];
     bool _cycleRunning;
    
     
